@@ -1,0 +1,22 @@
+{
+  "name": "mars_rover",
+  "version": "1.0.0",
+  "description": "Mars Rover Solution - JavaScript + TDD",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "export NODE_ENV=test && jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kwenamokgohlwa/mars_rover.git"
+  },
+  "author": "Kwena Mokgohlwa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kwenamokgohlwa/mars_rover/issues"
+  },
+  "homepage": "https://github.com/kwenamokgohlwa/mars_rover#readme",
+  "devDependencies": {
+    "jasmine": "^3.6.4"
+  }
+}
