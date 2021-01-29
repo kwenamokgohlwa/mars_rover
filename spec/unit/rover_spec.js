@@ -1,64 +1,77 @@
-/* Example to act as a reminder
-
-describe("Player", function() {
-    var Player = require('../../lib/jasmine_examples/Player');
-    var Song = require('../../lib/jasmine_examples/Song');
-    var player;
-    var song;
+describe("Rover", function() {
+    const Rover = require("../../src/rover").Rover;
   
     beforeEach(function() {
-      player = new Player();
-      song = new Song();
+        rover = new Rover();
     });
   
-    it("should be able to play a Song", function() {
-      player.play(song);
-      expect(player.currentlyPlayingSong).toEqual(song);
-  
-      //demonstrates use of custom matcher
-      expect(player).toBePlaying(song);
+    it("should be able to navigate within grid - Given test case", function() {
+        rover.grid = [8, 8];
+        rover.position = {grid: [1, 2], direction: "E"};
+        rover.commands = ["M", "M", "L", "M", "R", "M", "M", "R", "R", "M", "M", "L"];
+    
+        let path = rover.actionCommands(rover.commands);
+
+        // Comment out the tests and uncomment the logs to view results
+
+        expect(path.next().value).toEqual({ grid: [ 2, 2 ], direction: 'E' });
+        expect(path.next().value).toEqual({ grid: [ 3, 2 ], direction: 'E' });
+        expect(path.next().value).toEqual({ grid: [ 3, 2 ], direction: 'N' });
+        expect(path.next().value).toEqual({ grid: [ 3, 3 ], direction: 'N' });
+        expect(path.next().value).toEqual({ grid: [ 3, 3 ], direction: 'E' });
+        expect(path.next().value).toEqual({ grid: [ 4, 3 ], direction: 'E' });
+        expect(path.next().value).toEqual({ grid: [ 5, 3 ], direction: 'E' });
+        expect(path.next().value).toEqual({ grid: [ 5, 3 ], direction: 'S' });
+        expect(path.next().value).toEqual({ grid: [ 5, 3 ], direction: 'W' });
+        expect(path.next().value).toEqual({ grid: [ 4, 3 ], direction: 'W' });
+        expect(path.next().value).toEqual({ grid: [ 3, 3 ], direction: 'W' });
+        expect(path.next().value).toEqual({ grid: [ 3, 3 ], direction: 'S' });
+
+        // Uncomment logs to view results in console
+
+        // console.log(path.next().value);
+        // console.log(path.next().value);
+        // console.log(path.next().value);
+        // console.log(path.next().value);
+        // console.log(path.next().value);
+        // console.log(path.next().value);
+        // console.log(path.next().value);
+        // console.log(path.next().value);
+        // console.log(path.next().value);
+        // console.log(path.next().value);
+        // console.log(path.next().value);
+        // console.log(path.next().value);
     });
-  
-    describe("when song has been paused", function() {
-      beforeEach(function() {
-        player.play(song);
-        player.pause();
-      });
-  
-      it("should indicate that the song is currently paused", function() {
-        expect(player.isPlaying).toBeFalsy();
-  
-        // demonstrates use of 'not' with a custom matcher
-        expect(player).not.toBePlaying(song);
-      });
-  
-      it("should be possible to resume", function() {
-        player.resume();
-        expect(player.isPlaying).toBeTruthy();
-        expect(player.currentlyPlayingSong).toEqual(song);
-      });
-    });
-  
-    // demonstrates use of spies to intercept and test method calls
-    it("tells the current song if the user has made it a favorite", function() {
-      spyOn(song, 'persistFavoriteStatus');
-  
-      player.play(song);
-      player.makeFavorite();
-  
-      expect(song.persistFavoriteStatus).toHaveBeenCalledWith(true);
-    });
-  
-    //demonstrates use of expected exceptions
-    describe("#resume", function() {
-      it("should throw an exception if song is already playing", function() {
-        player.play(song);
-  
-        expect(function() {
-          player.resume();
-        }).toThrowError("song is already playing");
-      });
+
+    it("should return \"Out of Bounds\" when outside of the grid - Given test case", function() {
+        rover.grid = [8, 8];
+        rover.position = {grid: [1, 2], direction: "E"};
+        rover.commands = ["M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M"];
+    
+        let path = rover.actionCommands(rover.commands);
+
+        // Comment out the tests and uncomment the logs to view results
+
+        expect(path.next().value).toEqual({ grid: [ 2, 2 ], direction: 'E' });
+        expect(path.next().value).toEqual({ grid: [ 3, 2 ], direction: 'E' });
+        expect(path.next().value).toEqual({ grid: [ 4, 2 ], direction: 'E' });
+        expect(path.next().value).toEqual({ grid: [ 5, 2 ], direction: 'E' });
+        expect(path.next().value).toEqual({ grid: [ 6, 2 ], direction: 'E' });
+        expect(path.next().value).toEqual({ grid: [ 7, 2 ], direction: 'E' });
+        expect(path.next().value).toEqual({ grid: [ 8, 2 ], direction: 'E' });
+        expect(path.next().value).toEqual('Out of Bounds');
+
+        // Uncomment logs to view results in console
+
+        // console.log(path.next().value);
+        // console.log(path.next().value);
+        // console.log(path.next().value);
+        // console.log(path.next().value);
+        // console.log(path.next().value);
+        // console.log(path.next().value);
+        // console.log(path.next().value);
+        // console.log(path.next().value);
+
     });
   });
   
-  */
