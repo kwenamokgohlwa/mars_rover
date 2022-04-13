@@ -1,7 +1,7 @@
 {
   "name": "mars_rover",
-  "version": "1.0.0",
-  "description": "Mars Rover Solution - JavaScript + TDD",
+  "version": "2.0.0",
+  "description": "Mars Rover Solution - JavaScript [Node]",
   "main": "src/app.js",
   "scripts": {
     "test": "jasmine"
